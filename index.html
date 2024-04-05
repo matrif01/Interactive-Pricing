@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interactive Pricing</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="h-screen flex justify-center bg-[#f7f9fc]">
+    <div
+      class="absolute inset-0 h-1/2 bg-center bg-cover bg-no-repeat"
+      style="background-image: url('./imgs/bg-pattern.svg')"
+    ></div>
+
+    <div class="m-20">
+      <div class="relative">
+        <div class="flex flex-col gap-3">
+          <div class="z-10">
+            <h1
+              class="text-center font-[Manrope] font-extrabold text-3xl text-[#293356]"
+            >
+              Simple, traffic-based pricing
+            </h1>
+            <p class="text-center font-[Manrope] text-lg text-[#858fad]">
+              Sign-up for our 30-days trial.No card required
+            </p>
+          </div>
+
+          <img
+            src="./imgs/pattern-circles.svg"
+            class="absolute z-0 top-[-38px] left-[140px] md:left-[420px]"
+          />
+        </div>
+        <div
+          class="container bg-white rounded-lg py-36 mt-10 md:mt-24 md:px-60"
+        >
+          <div
+            x-data="{ selectedValue: 50, max: 100 }"
+            class="flex flex-col justify-center appearance-none [-webkit-appearance-none] items-center gap-[1] mt-[-120px] md:flex md:flex-row md:gap-10"
+          >
+            <p
+              class="text-[#858fad] whitespace-nowrap"
+              x-text="`${selectedValue}k PAGEVIEWS`"
+            ></p>
+
+            <div class="w-[60%] my-[14%] mx-auto relative md:top-10">
+              <input
+                type="range"
+                min="0"
+                :max="max"
+                x-model="selectedValue"
+                class="appearance-none w-full bg-gray-200 h-[7px] rounded [&::-webkit-slider-thumb]:hover:shadow-[#a5f3eb] [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-12 [&::-webkit-slider-thumb]:h-12 [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:relative [&::-webkit-slider-thumb]:z-[3]"
+              />
+              <div
+                class="h-28 w-12 absolute -bottom-[14px] transform -translate-x-[50%] z-[2]"
+                :style="{ left: `${selectedValue*100/max}%` }"
+              >
+                <div
+                  class="absolute bottom-[3px] h-10 w-10 bg-[#10d5c2] hover:bg-[#0b7a72] rounded-full drop-shadow-[0_15px_15px_rgb(16,213,194,0.8)] bg-center bg-[length:25px_15px] bg-no-repeat"
+                  style="background-image: url(./imgs/icon-slider.svg)"
+                ></div>
+              </div>
+              <div
+                class="absolute h-2 bg-[#a5f3eb] rounded bottom-[6px] left-0"
+                id="progressBar"
+                :style="{ width: `${selectedValue*100/max}%` }"
+              ></div>
+            </div>
+
+            <div class="flex justify-center items-center gap-2">
+              <p class="font-[Manrope] font-extrabold text-3xl text-[#293356]">
+                $16.00
+              </p>
+              <span class="text-[#858fad]">/month</span>
+            </div>
+          </div>
+          <div class="flex justify-center items-center">
+            <div class="m-7 flex items-center gap-2">
+              <p class="text-[#858fad]">Monthly billing</p>
+              <input
+                type="checkbox"
+                class="peer sr-only opacity-0"
+                id="toggle"
+              />
+              <label
+                for="toggle"
+                class="relative flex h-6 w-11 cursor-pointer items-center rounded-full bg-gray-400 px-0.5 outline-gray-400 transition-colors before:h-5 before:w-5 before:rounded-full before:bg-white before:shadow before:transition-transform before:duration-300 peer-checked:bg-[#a5f3eb] peer-checked:before:translate-x-full peer-focus-visible:outline peer-focus-visible:outline-offset-2 peer-focus-visible:outline-gray-400 peer-checked:peer-focus-visible:outline-green-500"
+                for="toggle "
+              >
+                <span class="sr-only">Enable</span>
+              </label>
+            </div>
+            <div class="flex items-center gap-2 p-3">
+              <p class="text-[#858fad]">Yearly Billing</p>
+              <span
+                class="px-2 font-semibold rounded-lg text-[#ff8c66] bg-[#feece7]"
+                >-25%</span
+              >
+            </div>
+          </div>
+          <div class="border-t-2 pt-12">
+            <div
+              class="flex flex-col gap-5 justify-center items-center md:flex md:flex-row md:gap-52"
+            >
+              <ul class="flex flex-col gap-2">
+                <li class="flex items-center gap-1">
+                  <img class="h-3" src="./imgs/icon-check.svg" /> Unlimited
+                  websites
+                </li>
+                <li class="flex items-center gap-1">
+                  <img class="h-3" src="./imgs/icon-check.svg" /> 100% data
+                  ownership
+                </li>
+                <li class="flex items-center gap-1">
+                  <img class="h-3" src="./imgs/icon-check.svg" /> Email reports
+                </li>
+              </ul>
+
+              <button
+                class="bg-[#293356] px-8 py-2 rounded-3xl text-[#bfc8e4] text-sm font-semibold"
+              >
+                Start my trial
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
